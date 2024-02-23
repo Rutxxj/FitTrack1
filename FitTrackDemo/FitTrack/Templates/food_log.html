@@ -1,0 +1,118 @@
+{% extends 'home.html' %}
+
+{% load static %}
+
+{% block title %}Food Tracker | Food Log{% endblock %}
+
+{% block body %}
+<div class='py-4 mt-auto'>
+    <div class='container-fluid px-4'>
+        <div class='row justify-content-center'>
+            <div class='col-xl-12'>
+                <div class='row'>
+                    <div class='col-md-6 mt-4'>
+                        <div class='card mb-3'>
+                            <div class='card-header'>
+                                <h5>Select food to add to the Food Log</h5>
+                            </div>
+                            <div class='card-body'>
+                                <form method='POST'>
+                                    {% csrf_token %}
+                                    <div class='form-group'>
+                                        <div class='row'>
+                                            <div class='col-8'>
+                                                <label for="food_consumed">Select food item:</label>
+                                                <select name="food_consumed" id="food_consumed" class="form-control">
+                                                    {% for food in foods %}
+                                                    <option value="{{ food.food_name }}">{{ food.food_name }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                            <div class='col-4 align-self-end'>
+                                                <button type='submit' class='btn btn-brand'>Add Food</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='col-md-6 mt-4'>
+                        
+                            <!-- <div class='card-header'>
+                                {% for day_entry in day %} 
+                                <h5>Food consumed today</h5>
+                                <h5>
+                                    <p>Day: {{ day_entry.day }}</p>
+                                    {% endfor %}
+                                    <p>Date: {{ date }}</p>
+                                </h5>
+                            </div> -->
+                            <div class='card-body'>
+                                <div class="container">
+                                    <h1>Food Log for {{ request.user.username }}</h1>
+                                    <table class="weight-table">
+                                        <thead>
+                                            <tr>
+                                                <th scope='col'>Food Item</th>
+                                                <th scope='col'>Calories</th>
+                                                <th scope='col'>Fat (g)</th>
+                                                <th scope='col'>Carbs (g)</th>
+                                                <th scope='col'>Protein (g)</th>
+                                                <th scope='col'>Delete</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for log_entry in user_food_log %}
+                                            <tr>
+                                                <td>{{ log_entry.food_consumed.food_name }}</td>
+                                                <td>{{ log_entry.food_consumed.calories }}</td>
+                                                <td>{{ log_entry.food_consumed.fat }}</td>
+                                                <td>{{ log_entry.food_consumed.carbohydrates }}</td>
+                                                <td>{{ log_entry.food_consumed.protein }}</td>
+                                                <td><a class='btn btn-brand' href="{% url 'food_log_delete' log_entry.id %}">Delete</a></td>
+                                            </tr>
+                                            {% empty %}
+                                            <tr>
+                                                <td colspan="6">No food log found.</td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    
+                </div>
+                <div class="container">
+                    <!-- <div class="row">
+                        <div class="col-md-6">
+                            <h2>Your Food Log:</h2>
+                            <ul class="list-group">
+                                {% for log in user_food_log %}
+                                    <li class="list-group-item">{{ log.food_consumed.name }} - {{ log.food_consumed.calories }} cal</li>
+                                {% endfor %}
+                            </ul>
+                        </div> -->
+                        <div class="col-md-6">
+                            <div class="card shadow">
+                                <div class="card-body">
+                                    <h2 class="card-title">Total Calories: {{ total_calories }}</h2>
+                                    <h2 class="card-title">Total Proteins: {{ total_proteins }}</h2>
+                                    <h2 class="card-title">Total Fats: {{ total_fats }}</h2>
+                                </div>
+                            </div>
+                        </div>
+                        
+                            
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+{% endblock %}

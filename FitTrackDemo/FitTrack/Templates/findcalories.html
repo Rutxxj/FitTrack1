@@ -1,0 +1,139 @@
+{% extends "home.html" %}
+{% load static %}
+{% block title %}
+    FitTrack | FindCalories
+{% endblock %}
+{%block body %}
+<div class="container-cal">
+    <div class="content">
+        <h1>Find Marcos <br>and Nutrients in your diet.
+        </h1>
+        <form method="POST">
+            {% csrf_token %}
+                  <input type="text" name="query" placeholder="search for calories in your food..." required>
+                  <button class="btn" type="submit" >Find calories</button>
+          </form>
+          
+    </div>
+</div>
+<div class="cotainer-cnt">
+    {%if api %}
+    {%if api == "Oops There was an error" %}
+    <div class="alert alert-warning"> Oh no! something went wrong.Please try again in sometime. </div>
+    {%else%}
+    <h1 class="cnt"> {{api.0.name | capfirst}} has a total of <strong> {{api.0.calories}} Calories</strong>
+      {%if api.0.calories > 200 %}
+        <img src="{% static 'images/shocked.png' %}" class="img-responsive" />
+        {%endif%}
+    </h1>
+      {% if api.0.sodium_mg > 1000%}
+
+    <div class="alert alert-danger d-flex align-items-center mt-3 " role="alert">
+        <div >
+           <center>This food contains an high amount of sodium. High Sodium cuases Sever dehydration and water
+            retention.</center> 
+        </div>
+    </div>
+    {% endif %}
+    {% if api.0.sugar_g > 100%}
+
+    <div class="alert alert-danger d-flex align-items-center mt-3 text-center" role="alert">
+        <div>
+            This food contains an high amount of Sugar. High Sugar cuases insulin spikes and it causes Obesity.
+        </div>
+    </div>
+    {% endif %}
+</div>
+<div class="row justify-content-center mt-5 mb-5">
+    <div class="col-md-10 caloriescont shadow rounded">
+        <div class="row">
+
+            <div class="col-md-12">
+                <h2 class="mt-3 mb-4">Nutritional Values </h2><span></span>
+                <ul>
+                    <li class="servingsize">Serving Size per a Bowl 100g <span class="float-end"></span></li>
+                    <li>Carbohydrates: <span class="float-end">{{api.0.carbohydrates_total_g}}</span>
+                    </li>
+                    <li>Cholesterol: <span class="float-end">{{api.0.cholesterol_mg}}</span></li>
+                    <li>Saturated fat: <span class="float-end">{{api.0.fat_saturated_g}}</span></li>
+                    <li>Total Fat: <span class="float-end">{{api.0.fat_total_g}}</span></li>
+                    <li>Fiber Content: <span class="float-end">{{api.0.fiber_g}}</span></li>
+                    <li>Potassium <span class="float-end">{{api.0.potassium_mg}}</span></li>
+                    <li>Protein: <span class="float-end">{{api.0.protein_g}}<span></li>
+                    <li>Sodium:<span class="float-end">{{api.0.sodium_mg}}</span></li>
+                    <li>Sugar: <span class="float-end">{{api.0.sugar_g}}</span></li>
+                </ul>
+            </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% endif %} 
+</div>
+<!-- <div class="container">
+
+    <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+            <img src="{% static 'images/logo.png'%}" class=" img-responsive logo mb-5 mt-5" />
+            <form method="POST">
+              {% csrf_token %}
+                <div class="input-group input-group-lg mb-5">
+                    <input type="text" name="query" class="form-control inputstyle"
+                        placeholder="search for calories in your food..." required>
+                    <button class="btn whoop" type="submit" id="button-addon2">Find calories</button>
+                </div>
+            </form>
+            {%if api %}
+            {%if api == "Oops There was an error" %}
+            <div class="alert alert-warning"> Oh no! something went wrong.Please try again in sometime. </div>
+            {%else%}
+            <h1> {{api.0.name | capfirst}} has a total of <strong> {{api.0.calories}} Calories</strong>
+              {%if api.0.calories > 200 %}
+                <img src="{% static 'images/shocked.png' %}" class="img-responsive" />
+                {%endif%}
+            </h1>
+              {% if api.0.sodium_mg > 1000%}
+  
+            <div class="alert alert-danger d-flex align-items-center mt-3" role="alert">
+                <div>
+                    This food contains an high amount of sodium. High Sodium cuases Sever dehydration and water
+                    retention.
+                </div>
+            </div>
+            {% endif %}
+            {% if api.0.sugar_g > 100%}
+  
+            <div class="alert alert-danger d-flex align-items-center mt-3" role="alert">
+                <div>
+                    This food contains an high amount of Sugar. High Sugar cuases insulin spikes and it causes Obesity.
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        <div class="row justify-content-center mt-5 mb-5">
+            <div class="col-md-10 caloriescont shadow rounded">
+                <div class="row">
+  
+                    <div class="col-md-12">
+                        <h2 class="mt-3 mb-4">Nutritional Values </h2><span></span>
+                        <ul>
+                            <li class="servingsize">Serving Size per 100/Grams <span class="float-end"></span></li>
+                            <li>Carbohydrates: <span class="float-end">{{api.0.carbohydrates_total_g}}</span>
+                            </li>
+                            <li>Cholesterol: <span class="float-end">{{api.0.cholesterol_mg}}</span></li>
+                            <li>Saturated fat: <span class="float-end">{{api.0.fat_saturated_g}}</span></li>
+                            <li>Total Fat: <span class="float-end">{{api.0.fat_total_g}}</span></li>
+                            <li>Fiber Content: <span class="float-end">{{api.0.fiber_g}}</span></li>
+                            <li>Potassium <span class="float-end">{{api.0.potassium_mg}}</span></li>
+                            <li>Protein: <span class="float-end">{{api.0.protein_g}}<span></li>
+                            <li>Sodium:<span class="float-end">{{api.0.sodium_mg}}</span></li>
+                            <li>Sugar: <span class="float-end">{{api.0.sugar_g}}</span></li>
+                        </ul>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% endif %}
+        </div> -->
+{%endblock%}

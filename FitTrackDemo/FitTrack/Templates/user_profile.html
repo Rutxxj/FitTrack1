@@ -1,0 +1,121 @@
+{% extends 'home.html' %}
+{% load static %}
+
+{% block title %}FitTrack | User_Profile{% endblock %}
+
+{% block body %}
+<div class='app mt-5'>    
+    <div class='card-body'>
+            <h6>Profile Name:{{user.username}}</h6>
+            <p>Email:{{user.email}}</p>
+    </div>
+</div>
+<div class='app mt-5'>    
+    <div class='card-body'>
+        <div class='form-group'>
+            <h5>Add Weight Measurement</h5>
+            <form action="{% url 'add_weight' %}" method="POST">
+                {% csrf_token %}
+                <div class="mb-3 mt-2">
+                    <label class="form-label">
+                        <span class="material-symbols-outlined">monitor_weight</span>
+                    </label>
+                    <input type="text" class="form-control" name="weight" placeholder="Enter Weight in kg" id="weightform">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">
+                        <span class="material-symbols-outlined">calendar_month</span>
+                    </label>
+                    {{ form.date }}
+                </div>
+                
+                <button type="submit" class="btn btn-brand">Add</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="app mt-3 mb-3">
+    <!-- Weight log table -->
+    <h1>Weight Log</h1>
+    <h2>Weight Log for {{ request.user.username }}</h2>
+    <table class="weight-table">
+        <thead>
+            <tr>
+                <th scope='col'>Weight (kg)</th>
+                <th scope='col'>Date</th>
+                <th scope='col'>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for weight_entry in user_weight_log %}
+            <tr>
+                <td>{{ weight_entry.weight }}</td>
+                <td>{{ weight_entry.date }}</td>
+                <td class='col-md-4'>
+                <a class='btn btn-brand' href="{% url 'weight_log_delete' weight_entry.id %}">Delete
+                </a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="2">No weight entries found.</td>
+            </tr>
+            {% endfor %}
+            {% for weight_record in user_weight_log %}
+                    <tr>
+                        
+                    </tr>
+                {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="app">
+    <canvas id="weightChart"></canvas>
+    <!-- Progress chart canvas -->
+</div>
+
+
+        
+        
+    
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    var dates = [];
+    var weights = [];
+    {% for weight_entry in user_weight_log %}
+        dates.push("{{ weight_entry.date }}");
+        weights.push("{{ weight_entry.weight }}");
+    {% endfor %}
+
+    var ctx = document.getElementById('weightChart').getContext('2d');
+    var weightChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: dates,
+            datasets: [{
+                label: 'Weight Progress',
+                data: weights,
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+</script>
+{% endblock %}
+
+
+
+

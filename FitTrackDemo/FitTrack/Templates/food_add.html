@@ -1,0 +1,66 @@
+
+{% extends 'home.html' %}
+{%load static %}
+{% block title %}Food Tracker | Add Food Item{% endblock %}
+
+{% block body %}
+<div class='py-4 mt-auto'>
+    
+
+        {% if success %}
+            <br>
+            <div class='alert alert-dismissible alert-success' role='alert'>
+                <button type='button' class='btn-close' data-bs-dismiss='alert'></button>
+                The new food item added successfully.
+            </div>
+        {% else %}           
+            <div class='row'>
+                <div class='col-lg-6 offset-lg-3'>
+                    
+                    <div class='col-d-6'>
+                            <form action="{% url 'food_add_view' %}" method='POST' enctype='multipart/form-data' class="form">
+                                {% csrf_token %}
+                                <h4 class="text-center">Add New Food</h4>
+                                <div class='form-group'>
+                                    <div class="mb-3">
+                                        <label for="id" class="form-label"><h6>ID</h6></label>
+                                        <input type="text" class="form-control"  name="id"  placeholder='Enter ID'>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="food_name" class="form-label"><h6>Food Name</h6></label>
+                                        <input type="text" class="form-control"  name="food_name"  placeholder='Food Name'>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="quantity" class="form-label"><h6>Quantity</h6></label>
+                                        <input type="text" class="form-control"  name="quantity"  placeholder='In (Gram)'>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="calories" class="form-label"><h6>Calories</h6></label>
+                                        <input type="text" class="form-control"  name="calories"  placeholder='Calories in your food'>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="protein" class="form-label"><h6>Protein</h6></label>
+                                        <input type="text" class="form-control"  name="protein"  placeholder='Protein'>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="fat" class="form-label"><h6>Fat</h6></label>
+                                        <input type="text" class="form-control"  name="fat"  placeholder='Fats'>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="carbohydrates" class="form-label"><h6>Carbs</h6></label>
+                                        <input type="text" class="form-control"  name="carbohydrates"  placeholder='Carbs'>
+                                    </div>        
+                                    <button type='submit' class='btn btn-brand'><h6>Save</h6></button>
+                                    <a href="{% url 'index' %}" class='btn btn-outline-dark'>Cancel</a>
+                                </div>
+                            </form>
+                        
+                        </div>
+                </div>
+            </div>        
+        {% endif %}
+
+    
+</div>
+
+{% endblock %}

@@ -1,0 +1,154 @@
+{% extends "home.html" %}
+{% load static %}
+{% block title %}
+    FitTrack | Base
+{% endblock %}
+{%block body %}
+<!--!!!!!!!!!!!!!!!!!! SCROLLER !!!!!!!!!!!!!!!!!!!-->
+<div class="slider-wrapper owl-carousel owl-theme" id="hero-slider">
+  <div class="slide1 min-vh-100 bg-cover d-flex align-items-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h1 class="display-2 my-4 text-white text-uppercase">Journey Starts Here</h1>
+          <h6 class="text-uppercase text-white">Your Health Journey
+             <br>Improve your health by creating good habits & <br>eating more mindfully with FitTrack.</h6>
+          
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="slide2 min-vh-100 bg-cover d-flex align-items-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 ">
+          <h1 class="display-2 my-4 text-white text-uppercase">Track food</h1>
+
+          <h6 class="text-uppercase text-white "> Tracking calories and macros <br> is easy with our website</h6>
+          
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="slide3 min-vh-100 bg-cover d-flex align-items-center">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h1 class="display-2 my-4 text-white text-uppercase">Love the<br> food</h1>
+        <h6 class="text-uppercase text-white "> Find nutrition insights<br> to support you along your journey<br>you eat</h6>
+        
+
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<!--!!!!!!!!!!!!!!!!! SCROLLER END !!!!!!!!!!!!!!!!!!!-->
+<!--@@@@@@@@@@@@@@@@@@@ SERVICES @@@@@@@@@@@@@@@@@@@@@@-->
+<section id="services">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 intro text-center">
+        <h6>Our services</h6>
+        <h1>How It Works</h1>
+      </div>
+    </div>
+    <div class="row g-4">
+    <div class="col-lg-4 col-sm-6">
+      <div class="service-box">
+        <img src="{% static 'images/logo2.png'%}" alt="">
+        <h5>Stay On Track </h5>
+        <p>Add your meals & snacks, water intake,
+           and exercise to reach your goals</p>
+        </div>
+      </div>
+      <div class="col-lg-4 col-sm-6">
+        <div class="service-box">
+          <img src="{% static 'images/logo3.png'%}" alt="">
+          <h5>Get food Smart </h5>
+          <p>Food Grades reveal the quality of 
+            the calories you consume</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+          <div class="service-box">
+            <img src="{% static 'images/logo4.png'%}" alt="">
+            <h5>Scan for success </h5>
+            <p>Track foods quickly & easily with
+              the scanner</p>
+            </div>
+          </div>
+          <div class="col-lg-4 col-sm-6">
+            <div class="service-box">
+              <img src="{% static 'images/logo5.png'%}" alt="">
+              <h5>Get the details</h5>
+              <p>View macronutrients—carbs,
+                protein & fat to maintain a balanced diet</p>
+              </div>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+              <div class="service-box">
+                <img src="{% static 'images/logo6.png'%}" alt="">
+                <h5>Personalize your diet</h5>
+                <p>Choose from options like low-carb,
+                   vegan, paleo, keto diets & more</p>
+                </div>
+              </div>
+              <div class="col-lg-4 col-sm-6">
+                <div class="service-box">
+                  <img src="{% static 'images/logo7.png'%}" alt="">
+                  <h5>Stay health-conscious</h5>
+                  <p>Find dietary recommendations for diabetes, high cholesterol,
+                     heart conditions & more</p>
+                  </div>
+                </div>
+    </div>
+  </div>
+</section>
+<!--@@@@@@@@@@@@@@@@@ SERVICES END @@@@@@@@@@@@@@@@@-->
+<!--#################   REVIEWS    #################-->
+<section id="reviews" class="bg-cover">
+  <div class="owl-carousel owl-theme" id="reviews-slider">
+    <div class="review">
+      <img src="{%static 'images/profile.png'%}" alt="">
+      <small>Diana</small>
+      <p class="lead">I love the scanning feature. I love being able to decide 
+        which food to choose at the store. 
+        Too unhealthy? There's an alternative!
+      </p>
+    </div>
+    <div class="review">
+      <img src="{%static 'images/profile.png'%}" alt="">
+      
+      <small>Janice</small>
+      <p class="lead">I was never able to lose weight 
+        before. Thanks to Fooducate, I've 
+        lost 20 lbs in 6 months.
+        An incredible, life changing app
+      </p>
+    </div>
+    <div class="review">
+      <img src="{%static 'images/profile.png'%}" alt="">
+      <small>Brittany</small>
+      <p class="lead">I love how this app doesn't 
+        just track calories, because that's not 
+        all that matters. It shows every nutrition 
+        aspect and info about ingredients in that item.
+      </p>
+    </div>
+    <div class="review">
+      <img src="{%static 'images/profile.png'%}" alt="">
+      <small>K.G.</small>
+      <p class="lead">I lost 40 pounds with Fooducate.
+         It keeps me accountable and aware!
+      </p>
+    </div>
+  </div>
+</section>
+<!--################# REVIEWS END  #################-->
+{% endblock %}

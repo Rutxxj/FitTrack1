@@ -1,0 +1,75 @@
+{% extends "home.html" %}
+{% load static %}
+{% block title %}
+    FitTrack | Calculate BMR
+{% endblock %}
+{%block body %}
+<div class="calories-cal">
+   <div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="left-data">
+            <h1>Calculate Basal Metabolic Rate (BMR)</h1>
+            <form class="" action="{% url 'calculate_bmr' %}" method='post'>
+                {% csrf_token %}
+            <div class="mb-3 mt-5">
+              <label  class="form-label">Age</label>
+              <input type="text" class="form-control" name="age"  placeholder="Enter age in years" id="age">
+              
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Weight</label>
+              <input type="text" class="form-control"  name="weight"  placeholder='Enter Weight in kg' id="weight">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Height</label>
+                <input type="text" class="form-control"  name="height"  placeholder='Enter height in cm' id="height">
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Gender</label>
+                <select type="text" class="form-control"  name="gender"  placeholder='Enter gender' id="gender">
+                        {% for value, label in form.fields.gender.choices %}
+                            <option value="{{ value }}">{{ label }}</option>
+                        {% endfor %}
+                </select>
+              </div>
+              <p id="resultcal"></p>
+            <button type="submit" class="btn btn-brand">Calculate BMR</button>
+          </form>
+            
+        </div>
+    </div>
+    <div class="col-md-6 mt-3">
+        <h2>User's BMR Log</h2>
+            <table class="weight-table mt-10">
+              <thead>
+                  <tr>
+                      <th scope='col'> Calories</th>
+                      <th scope='col'>Delete</th>
+                  </tr>
+              </thead>
+              <tbody>
+                {% for bmr_entry in user_bmr_log %}
+                  <tr>
+                      <td>{{ bmr_entry.bmr }}</td>
+                  
+                  <td class='col-md-4'>
+                    <a class='btn btn-brand' href="{% url 'bmr_log_delete' bmr_entry.id %}">Delete
+                    </a>
+                    </td>
+                  </tr>
+                  {% empty %}
+                  <tr>
+                      <td colspan="2">No BMR entries found.</td>
+                  </tr>
+                  {% endfor %}
+              </tbody>
+          </table>
+        </div>
+    </div>
+
+   </div>
+</div> 
+</div>
+    
+{% endblock %}
